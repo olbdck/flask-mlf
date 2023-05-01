@@ -14,24 +14,24 @@ def get_db():
     return g.db
 
 
+def close_db(e=None):
+    db = g.pop("db", None)
+
+    if db is not None:
+        db.close()
+
+
 def init_db():
     db = get_db()
 
-    with current_app.open_resource("scheme.sql") as f:
-        db.executescript(f.read().decode("utf8"))
+    with current_app.open_resource('schema.sql') as f:
+        db.executescript(f.read().decode('utf8'))
 
 
 @click.command("init-db")
 def init_db_command():
     init_db()
     click.echo("Imitialized the database.")
-
-
-def close_db(e=None):
-    db = g.pop("db", None)
-
-    if db is not None:
-        db.close()
 
 
 def init_app(app):
