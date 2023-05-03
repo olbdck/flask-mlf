@@ -1,0 +1,4 @@
+include MLF/shcema.sql
+graft MLF/static
+graft MLF/templates
+global-exclude *.pyc
